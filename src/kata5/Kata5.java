@@ -5,7 +5,7 @@ public class Kata5 {
     public static void main(String[] args) {
         PersonLoader loader = new MockPersonLoader();
         HistogramBuilder<Person> builder = new HistogramBuilder<>(loader.load());
-        ConsoleHistogramViewer<String> viewer = new ConsoleHistogramViewer<>(builder.build(createAttributeExtractor()));
+        HistogramViewer<String> viewer = new GraphicalHistogramViewer<>(builder.build(createAttributeExtractor()));
         viewer.show();
     }
     
