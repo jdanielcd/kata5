@@ -7,10 +7,11 @@ public class HistogramBuilder<T> {
         this.collection = collection;
     }
     
-    public Histogram<T> build(){
-        Histogram<T> histogram = new Histogram<>();
+    public <A> Histogram<A> build(AttributeExtractor<T,A> extractor){
+        Histogram<A> histogram = new Histogram<>();
         for (T item : collection) {
-            histogram.put(item, histogram.get(item)+1);
+            A attribute = extractor.extract(item);
+            histogram.put(attribute, histogram.get(attribute)+1);
         }
         return histogram;
     }

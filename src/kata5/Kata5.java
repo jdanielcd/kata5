@@ -6,6 +6,15 @@ public class Kata5 {
         PersonLoader loader = new MockPersonLoader();
         HistogramBuilder<Person> builder = new HistogramBuilder<>(loader.load());
         HistogramViewer<Person> viewer = new HistogramViewer<>();
-        viewer.show(builder.build());
+        viewer.show(builder.build(createAttributeExtractor()));
+    }
+    
+    public AttributeExtractor<Person, String> createAttributeExtractor(){
+        return new AttributeExtractor<Person, String>() {
+            @Override
+            public String extract(Person person) {
+                return person.getMail().getDomain();
+            }
+        };
     }
 }
